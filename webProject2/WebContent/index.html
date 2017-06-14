@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>회원가입양식</title>
+</head>
+<body>
+<!-- 되게 옛날 방식 -->
+
+<!-- 
+form tag는 중요하다. 지금은 거의 form tag안쓴다.
+ 
+input tag는 화면에서 입력 값이 들어올때 사용한다. 
+
+input type 이 text면 text이 보고, type password는 text가 안보인다
+
+input type submit은 버튼의 한 종류
+(button과 cancel, reset이 더 있다. 종류는 cancel reset도 있었는데 없어졌다)
+
+form tag에 있는 값들을 전달하게해주는 것이 submit이기 때문에 반드시 form tag 안에 
+만들어져야 한다
+
+서버에 값을 보낼때 url이 바뀌는 것은 get방식, 안바뀌는 것은 post 방식이다. 
+
+* get 방식
+key와 value로 이루어져서 url에 보내고 싶은 값을 맵핑해서 보내준다. 
+name에 있는 값이 key로 되서 가게 된다. 
+id, name에서 explore랑 netscape는 반대이기 때문에 같은 값을 쓰기도 한다.
+-->
+
+
+<form action = "http://localhost:8080/lec_1_170517/test.jsp">
+id: 		<input type = "text" name = "id" id = "id"/><br/>
+password: 	<input type = "password" name = "pwd" id = "pwd"/><br/>
+name: 		<input type = "text" name = "name" id = "name"/><br/>
+age: 		<input type = "text" name = "age" id = "age"/><br/>
+tel: 		<input type = "text" name = "tel" id = "tel"/><br/>
+mobile: 	<input type = "text" name = "mobile" id = "mobile"/><br/>
+<input type = "submit" value ="회원가입"/>
+</form>
+
+
+</body>
+</html>
