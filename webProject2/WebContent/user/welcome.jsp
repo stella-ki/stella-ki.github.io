@@ -59,6 +59,8 @@
 		}
 %>
 </table>
+<jsp:include page="../board/board.jsp"></jsp:include>
+
 <%
 	}else{
 %>
@@ -66,7 +68,6 @@
 <%
 	}
 %>
-
 
 </body>
 </html>
