@@ -18,7 +18,11 @@
 	List<BoardItemDTO> list = dao.getBoardItemList();
 	UserDTO dto = (UserDTO)session.getAttribute("userDTO");
 %>
-
+<%	if(dto!=null &&
+		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
+	%>
+<form action="./test.boardInfo" method = "get" >
+<% } %>
 <table border="1" cellspacing="0" cellpadding="0" class="list_table">
 	<tr>
 	<td></td>
@@ -59,6 +63,7 @@
 	
 <%	if(dto!=null &&
 		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
+
 	%>	
 <%-- 	<td>
 	<%=(item.getIs_can_delete()==0?"삭제불가":"삭제가능") %>
@@ -81,9 +86,11 @@
 <%	if(dto!=null &&
 		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
 	%>
-<input type="hidden" name = "action" id = "action" value="delete">
+<input type="hidden" name = "action" id = "action" value="DELETEBOARDITEM">
 <input type="hidden" name = "item_num" id = "item_num"<%--  value="<%=item.getItem_num() %>" --%>>
 <input type = "submit" value = "삭제">
+</form>
+
 
 <form action="../board/write.jsp" method = "get" >
 <input type="hidden" name = "name" id = "name" value="<%=dto.getName()%>">

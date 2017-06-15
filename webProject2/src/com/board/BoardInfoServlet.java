@@ -1,6 +1,8 @@
 package com.board;
 
 import java.io.IOException;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,6 +15,9 @@ public class BoardInfoServlet  extends HttpServlet{
 	
 	public static final String SAVEBAORDITEM = "SAVEBAORDITEM";
 	public static final String MODIFYBOARDITEM = "MODIFYBOARDITEM";
+	public static final String DELETEBOARDITEM = "DELETEBOARDITEM";
+	
+	
 	
 	
 	private BoardItemDAO dao = new BoardItemDAO();
@@ -79,6 +84,17 @@ public class BoardInfoServlet  extends HttpServlet{
 			System.out.println(boardItemDTO);
 			
 			
+		}else if(action.equals(DELETEBOARDITEM)){
+			Map map = req.getParameterMap();
+			Iterator<String> key = map.keySet().iterator();
+			
+			while(key.hasNext()){
+				String id = key.next();
+				String num = "";
+				if(id.startsWith("delete_")){
+					num = id.substring("delete_".length());
+				}
+			}
 		}else{
 			
 		}
