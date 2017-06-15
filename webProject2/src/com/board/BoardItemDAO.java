@@ -11,11 +11,43 @@ import com.user.DBConn;
 
 public class BoardItemDAO {
 	
+	public boolean insertBoardItem(BoardItemDTO boardItemDto){
+		try {
+			Connection con = DBConn.getCon();
+			String sql = "insert into basic_board("
+											+ "create_date, "
+											+ "last_Update_Date, "
+											+ "auther, "
+											+ "title, "
+											+ "content, "
+											+ "is_can_delete) values (NOW(),NOW(),?,?,?,?)";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			
+			preparedStatement.setString(1, boardItemDto.getAuther());
+			preparedStatement.setString(2, boardItemDto.getTitle());
+			preparedStatement.setString(3, boardItemDto.getContent());
+			preparedStatement.setInt(4, boardItemDto.getIs_can_delete());
+			
+			int result = preparedStatement.executeUpdate();
+			
+			DBConn.closeCon();
+			
+			if(result == 1){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return false;
+	}
+	
 	public BoardItemDTO getBoardItem(int item_num){
 
 		try {
 			Connection con = DBConn.getCon();			
 			String sql = "select "
+					+ "item_num, "
 					+ "create_date, "
 					+ "delete_date, "
 					+ "last_Update_Date, "
@@ -31,14 +63,14 @@ public class BoardItemDAO {
 						
 			BoardItemDTO dto = new BoardItemDTO();
 			while (rs.next()) {	
-				
-				dto.setCreate_date(rs.getString(1));
-				dto.setDelete_date(rs.getString(2));
-				dto.setLast_Update_Date(rs.getString(3));
-				dto.setAuther(rs.getString(4));
-				dto.setTitle(rs.getString(5));
-				dto.setContent(rs.getString(6));
-				dto.setIs_can_delete(rs.getInt(7));
+				dto.setItem_num(rs.getInt(1));
+				dto.setCreate_date(rs.getString(2));
+				dto.setDelete_date(rs.getString(3));
+				dto.setLast_Update_Date(rs.getString(4));
+				dto.setAuther(rs.getString(5));
+				dto.setTitle(rs.getString(6));
+				dto.setContent(rs.getString(7));
+				dto.setIs_can_delete(rs.getInt(8));
 				
 			}
 						
@@ -92,5 +124,31 @@ public class BoardItemDAO {
 		}
 		
 		return null;
+	}
+
+	public boolean modifyBoardItem(BoardItemDTO boardItemDTO) {
+		try {
+			Connection con = DBConn.getCon();
+			//"update user_info set user_name=?, age=?, user_pwd=?, admin=?, board_admin=? where user_id=?;"
+			String sql = "update basic_board set last_Update_Date = NOW(), title=?, content=?, is_can_delete=? where item_num=?";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			
+			preparedStatement.setString(1, boardItemDTO.getTitle());
+			preparedStatement.setString(2, boardItemDTO.getContent());
+			preparedStatement.setInt(3, boardItemDTO.getIs_can_delete());
+			preparedStatement.setInt(4, boardItemDTO.getItem_num());
+			
+			int result = preparedStatement.executeUpdate();
+			
+			DBConn.closeCon();
+			
+			if(result == 1){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return false;
 	}
 }

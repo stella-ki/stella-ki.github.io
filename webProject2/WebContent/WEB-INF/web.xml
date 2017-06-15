@@ -35,4 +35,14 @@
     <servlet-name>userInfo</servlet-name>
     <url-pattern>*.info</url-pattern>
   </servlet-mapping>
+  
+    
+   <servlet>
+    <servlet-name>boardInfo</servlet-name>
+    <servlet-class>com.board.BoardInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>boardInfo</servlet-name>
+    <url-pattern>*.boardInfo</url-pattern>
+  </servlet-mapping>
 </web-app>

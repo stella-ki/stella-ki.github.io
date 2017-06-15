@@ -9,6 +9,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <body>
 <%
 UserService us = new UserServiceImpl();
@@ -16,7 +17,7 @@ List<UserDTO> userlist = us.getUserLists();
 %>
 <form action="./userInfo.info" >
 <input type = "hidden" name = "action" id = "action" value = "MANAGEUSERS"> 
-<table border="1" cellspacing="0" cellpadding="0">
+<table border="1" cellspacing="0" cellpadding="0"  class="list_table">
 	<tr>
 	<td></td>
 	<td>이름</td>

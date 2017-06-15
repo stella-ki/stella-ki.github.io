@@ -7,6 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>login</title>
 </head>
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <body>
 <script>
 function doLogin(){
@@ -42,7 +43,7 @@ function doLogin(){
    	xmlHttpObj.send(params);
 }
 </script>
-<table border="1" cellspacing="0" cellpadding="0">
+<table border="1" cellspacing="0" cellpadding="0"  class="list_table">
 	<tr>
 		<td colspan="2"> 로그인 </td> 
 	</tr>

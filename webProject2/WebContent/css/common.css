@@ -1,0 +1,17 @@
+/* list_table 에서 사용되는 tbody */
+.list_table tbody td 
+{ 
+	padding: 5px 0; 
+	text-align: center; 
+	border-bottom: 1px solid #e5e5e5; 
+}
+
+/* list_table 에서 사용되는 thead */
+.list_table thead th 
+{ 
+	border-top: 1px solid #e5e5e5; 
+	border-bottom: 1px solid #e5e5e5; 
+	padding: 5px 0; 
+	text-align: center; 
+	background: #faf9fa; 
+}

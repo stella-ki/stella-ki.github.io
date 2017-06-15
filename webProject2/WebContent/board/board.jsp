@@ -19,7 +19,7 @@
 	UserDTO dto = (UserDTO)session.getAttribute("userDTO");
 %>
 
-<table border="1" cellspacing="0" cellpadding="0">
+<table border="1" cellspacing="0" cellpadding="0" class="list_table">
 	<tr>
 	<td></td>
 	<td>생성날짜</td>
@@ -27,7 +27,12 @@
 	<td>수정날짜</td>
 	<td>작성자</td>
 	<td>제목</td>
-	<td>삭제여부</td>
+<%	if(dto!=null &&
+		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
+	%>	
+<!-- 	<td></td> -->
+	<td>삭제</td>
+<% } %>
 	</tr>
 <% 
 	for(BoardItemDTO item : list){
@@ -51,21 +56,40 @@
 	<td>
 	<a href="../board/boardItem.jsp?item_num=<%=item.getItem_num()%>" target="_self"><%=item.getTitle() %></a>
 	</td>
-	<td>
+	
+<%	if(dto!=null &&
+		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
+	%>	
+<%-- 	<td>
 	<%=(item.getIs_can_delete()==0?"삭제불가":"삭제가능") %>
+	</td> --%>
+	<td>
+	<%
+		if(item.getIs_can_delete()!=0){
+			%>
+			<input type="checkbox" name = "delete_<%=item.getItem_num() %>" id = "delete_<%=item.getItem_num() %>">
+			<%
+		}
+	%>
 	</td>
+<% } %>	
 	</tr>
 <% 
 }
 %>	
 </table>
 <%	if(dto!=null &&
-		dto.getIsAdmin() == UserDTO.ADMIN){
+		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
 	%>
+<input type="hidden" name = "action" id = "action" value="delete">
+<input type="hidden" name = "item_num" id = "item_num"<%--  value="<%=item.getItem_num() %>" --%>>
+<input type = "submit" value = "삭제">
+
 <form action="../board/write.jsp" method = "get" >
-<input type="hidden" value = "name" id = "name" value="<%=dto.getName()%>">
+<input type="hidden" name = "name" id = "name" value="<%=dto.getName()%>">
 <input type = "submit" value = "글쓰기">
 </form>
+
 <% } %>
 
 

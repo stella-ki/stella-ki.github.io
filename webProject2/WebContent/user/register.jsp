@@ -8,6 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>회원가입</title>
 </head>
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <%!
 String idStr = "";
 String pwStr = "";

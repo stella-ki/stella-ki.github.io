@@ -7,13 +7,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>welcome</title>
 </head>
+<link href="../css/common.css" rel="stylesheet" type="text/css">
 <body>
 <%
 	UserDTO dto = (UserDTO)session.getAttribute("userDTO");
 	if(dto!=null){
 %>
 
-<table border="1" cellspacing="0" cellpadding="0">
+<table border="1" cellspacing="0" cellpadding="0"  class="list_table">
 	<tr>
 		<td>
 		<%=dto.getName() %>님 환영합니다.

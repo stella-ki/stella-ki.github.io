@@ -7,8 +7,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>BoardItem</title>
 </head>
+
 <body>
 <%
 	UserDTO userdto = (UserDTO)session.getAttribute("userDTO");
@@ -19,15 +20,19 @@
 	request.setAttribute("boardItem", dto);
 %>
 
-<jsp:include page="./boardItemTable.jsp"/>
+<jsp:include page="./boardItemTable.jsp">
+	<jsp:param value="show" name="action"/>
+</jsp:include>
 
 <input type="button" value="목록으로 가기" onClick="javascript:self.location='../user/welcome.jsp';">
 
-<% if(userdto.getName().equals(dto.getAuther())){ %>
-<form action="" >
-<input type = "submit" value = "수정">
-</form>
+<form action="./modify.jsp" >
+<% if(userdto.getName().equals(dto.getAuther()) || userdto.getIsBoardAdmin()  == UserDTO.BOARDADMIN){ %>
+	<input type = "hidden" name = "action" id = "action" value = "MODIFYBOARDITEM">
+	<input type = "hidden" name = "item_num" id = "item_num" value = "<%=item_num%>">
+	<input type = "submit" value = "수정">
 <% } %>
+</form>
 <!-- <form action="" >
 <input type = "hidden" name = "" id = "" value = ""> 
 <input type = "submit" value = "저장">
