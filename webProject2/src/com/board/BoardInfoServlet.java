@@ -85,6 +85,7 @@ public class BoardInfoServlet  extends HttpServlet{
 			
 			
 		}else if(action.equals(DELETEBOARDITEM)){
+			System.out.println("test?");
 			Map map = req.getParameterMap();
 			Iterator<String> key = map.keySet().iterator();
 			
@@ -93,8 +94,14 @@ public class BoardInfoServlet  extends HttpServlet{
 				String num = "";
 				if(id.startsWith("delete_")){
 					num = id.substring("delete_".length());
+					dao.deleteBoardItem(Integer.parseInt(num));
 				}
 			}
+			
+			req.setAttribute("error_message", "글삭제");
+			req.setAttribute("go_page", "../user/welcome.jsp");
+			req.setAttribute("url_pattern", "");
+			disPatcher.forward(req, resq);	
 		}else{
 			
 		}

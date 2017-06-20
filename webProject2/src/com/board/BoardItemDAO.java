@@ -11,6 +11,28 @@ import com.user.DBConn;
 
 public class BoardItemDAO {
 	
+	public boolean deleteBoardItem(int boardItemnum){
+		try {
+			Connection con = DBConn.getCon();
+			String sql = "update basic_board SET delete_date = now() where item_num=?";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			
+			preparedStatement.setInt(1, boardItemnum);
+			
+			int result = preparedStatement.executeUpdate();
+			
+			DBConn.closeCon();
+			
+			if(result == 1){
+				return true;
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+		
+		return false;
+	}
+	
 	public boolean insertBoardItem(BoardItemDTO boardItemDto){
 		try {
 			Connection con = DBConn.getCon();

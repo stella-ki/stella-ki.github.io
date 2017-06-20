@@ -10,6 +10,11 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>게시판</title>
 </head>
+<script type="text/javascript">
+function f_checkBox(checked, name){
+	document.getElementById(name).checked = !checked;
+}
+</script>
 <link href="./css/table.css" rel="stylesheet" type="text/css">
 <body>
 
@@ -40,6 +45,8 @@
 	</tr>
 <% 
 	for(BoardItemDTO item : list){
+		if((dto.getIsBoardAdmin() != UserDTO.BOARDADMIN && item.getDelete_date()==null)||
+				dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
 %>
 	<tr>
 	<td>
@@ -70,14 +77,16 @@
 	</td> --%>
 	<td>
 	<%
-		if(item.getIs_can_delete()!=0){
+		if(item.getIs_can_delete()!=0 && item.getDelete_date()==null){
 			%>
 			<input type="checkbox" name = "delete_<%=item.getItem_num() %>" id = "delete_<%=item.getItem_num() %>">
 			<%
 		}
 	%>
 	</td>
-<% } %>	
+<% 
+		}
+	} %>	
 	</tr>
 <% 
 }
