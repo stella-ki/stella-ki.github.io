@@ -21,6 +21,11 @@ function getHttpXmlObj(){
 	//해당 브라우져가 듣보잡일경우.. 어떤 브라우져 인진 나도 모름.
 	alert("해당 브라우져가  Ajax를 지원하지 않습니다.");
 }
+
+function f_checkBox(checked, name){
+	document.getElementById(name).checked = !checked;
+}
+
 </script>
 </body>
 </html>

@@ -3,6 +3,7 @@
 <%@ page import="com.board.*" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.user.UserDTO" %>
+<%@ include file = "../util/ajax.jsp" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -59,7 +60,8 @@
 	<td colspan = "3">작성자</td>
 	<td><%=auther %></td>
 	<td>삭제 가능 여부</td>
-	<td><input type = "checkbox" name = "is_can_delete" id = "is_can_delete" <%=is_can_delete == 1?"checked=\"checked\"":"" %>> </td>
+	<td><input type = "checkbox" name = "is_can_delete" id = "is_can_delete" <%=is_can_delete == 1?"checked=\"checked\"":"" %>  
+	 <%=(action.equals("show"))?"onclick=\"f_checkBox(this.checked,'is_can_delete')\"":"" %>> </td>
 </tr>
 <tr>
 	<td>제목</td>

@@ -173,4 +173,64 @@ public class BoardItemDAO {
 		
 		return false;
 	}
+	
+
+	public List<BoardItemDTO> searchBoardItem(BoardItemDTO dto){
+		List<BoardItemDTO> dtos = new ArrayList<BoardItemDTO>();
+		try {
+			Connection con = DBConn.getCon();			
+			String sql = "select "
+					+ "item_num, "
+					+ "create_date, "
+					+ "delete_date, "
+					+ "last_Update_Date, "
+					+ "auther, "
+					+ "title, "
+					+ "content, "
+					+ "is_can_delete "
+					+ "from basic_board where 1=1";
+			if(dto.getTitle()!=null && !dto.getTitle().equals("")){
+				sql+=" and title like ?";
+			}
+			if(dto.getContent()!=null && !dto.getContent().equals("")){
+				sql+=" and content like ?";
+			}
+			System.out.println(sql);
+			PreparedStatement prestmt = con.prepareStatement(sql);
+		
+			int index = 1;
+			if(dto.getTitle()!=null && !dto.getTitle().equals("")){
+				System.out.println(dto.getTitle());
+				prestmt.setString(index, "%" +dto.getTitle() + "%");
+				index++;
+			}
+			if(dto.getContent()!=null && !dto.getContent().equals("")){
+				prestmt.setString(index, "%" +dto.getContent()+ "%");
+				index++;
+			}
+			
+			ResultSet rs = prestmt.executeQuery();
+						
+			while (rs.next()) {	
+				BoardItemDTO dtoresult = new BoardItemDTO();
+				dtoresult.setItem_num(rs.getInt(1));
+				dtoresult.setCreate_date(rs.getString(2));
+				dtoresult.setDelete_date(rs.getString(3));
+				dtoresult.setLast_Update_Date(rs.getString(4));
+				dtoresult.setAuther(rs.getString(5));
+				dtoresult.setTitle(rs.getString(6));
+				dtoresult.setContent(rs.getString(7));
+				dtoresult.setIs_can_delete(rs.getInt(8));
+				dtos.add(dtoresult);
+			}
+						
+			DBConn.closeCon();
+			return dtos;
+		} catch (SQLException | ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 }
