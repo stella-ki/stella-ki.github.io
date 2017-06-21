@@ -11,6 +11,7 @@ import com.user.DBConn;
 
 public class BoardItemDAO {
 	
+	
 	public boolean deleteBoardItem(int boardItemnum){
 		try {
 			Connection con = DBConn.getCon();
@@ -36,19 +37,28 @@ public class BoardItemDAO {
 	public boolean insertBoardItem(BoardItemDTO boardItemDto){
 		try {
 			Connection con = DBConn.getCon();
-			String sql = "insert into basic_board("
+			/*String sql = "insert into basic_board("
 											+ "create_date, "
 											+ "last_Update_Date, "
 											+ "auther, "
 											+ "title, "
 											+ "content, "
 											+ "is_can_delete) values (NOW(),NOW(),?,?,?,?)";
+			
 			PreparedStatement preparedStatement = con.prepareStatement(sql);
 			
 			preparedStatement.setString(1, boardItemDto.getAuther());
 			preparedStatement.setString(2, boardItemDto.getTitle());
 			preparedStatement.setString(3, boardItemDto.getContent());
 			preparedStatement.setInt(4, boardItemDto.getIs_can_delete());
+			*/
+			
+			String sql = "call insert_board_list(?,?,?)";
+			PreparedStatement preparedStatement = con.prepareStatement(sql);
+			System.out.println(sql);
+			preparedStatement.setString(1, boardItemDto.getAuther());
+			preparedStatement.setString(2, boardItemDto.getTitle());
+			preparedStatement.setString(3, boardItemDto.getContent());
 			
 			int result = preparedStatement.executeUpdate();
 			

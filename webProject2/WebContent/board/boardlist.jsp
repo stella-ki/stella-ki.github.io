@@ -22,7 +22,6 @@
 <%	if(dto!=null &&
 		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
 	%>
-<form action="./test.boardInfo" method = "get" >
 <% } %>
 <table border="1" cellspacing="0" cellpadding="0" class="list_table" width="500">
 	<tr>
@@ -82,10 +81,7 @@
 <%	if(dto!=null &&
 		dto.getIsBoardAdmin() == UserDTO.BOARDADMIN){
 	%>
-<input type="hidden" name = "action" id = "action" value="DELETEBOARDITEM">
-<input type="hidden" name = "item_num" id = "item_num"<%--  value="<%=item.getItem_num() %>" --%>>
-<input type = "submit" value = "삭제">
-</form>
+
 
 <form action="../board/write.jsp" method = "get" >
 <input type="hidden" name = "name" id = "name" value="<%=dto.getName()%>">

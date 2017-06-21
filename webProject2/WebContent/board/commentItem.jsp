@@ -9,10 +9,8 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>BoardItemTable</title>
+<title>BoardItem</title>
 </head>
-<link href="../css/common.css" rel="stylesheet" type="text/css">
-<body>
 <%
 	UserDTO userdto = (UserDTO)session.getAttribute("userDTO");
 	String action = request.getParameter("action");
@@ -25,7 +23,10 @@
 	String title = "";
 	String content = "";
 	int is_can_delete = 0;
-				
+	
+	CommentDAO cdao = new CommentDAO();
+	List<CommentDTO> cdtos = null;
+			
 	if(action.equals("show") || action.equals("modify")){
 		item_num = dto.getItem_num();
 		create_date = dto.getCreate_date();
@@ -35,6 +36,10 @@
 		title = dto.getTitle();
 		content = dto.getContent();
 		is_can_delete = dto.getIs_can_delete();
+		
+		if(action.equals("show")){
+			cdtos = cdao.getComments(item_num);
+		}
 		
 	}else if(action.equals("create")){
 		create_date = "170615";
@@ -47,53 +52,45 @@
 	
 	
 %>
-<input type = "hidden" name = "auther" id = "auther" value = "<%=auther %>" >
-<input type = "hidden" name = "item_num" id = "item_num" value = "<%=item_num %>" >
-
+<body>
+<br>
 <table border="1" cellspacing="0" cellpadding="0" class="list_table" width="500">
+<%
+if(action.equals("show") && cdtos.size() != 0){
+	for(CommentDTO temp : cdtos){
+%>
 <tr>
+	<td>이름</td><td><%=temp.getAuthor() %></td>
 	<td>작성일</td>
-	<td><%=create_date %></td>
-	<td>마지막 수정일</td>
-	<td><%=last_Update_Date%></td>
-	<td>삭제일</td>
-	<td><%=delete_date%></td>
+	<td colspan="2"><%=temp.getCreate_date() %></td>
+	<td><input type = "submit" value = "수정"></td>
+	</tr>
+	<tr>
+	<td colspan="6"><%=temp.getContent() %></td>
 </tr>
-<tr>
-	<td>작성자</td>
-	<td><%=auther %></td>
-	<td>삭제 가능 여부</td>
-	<td><input type = "checkbox" name = "is_can_delete" id = "is_can_delete" <%=is_can_delete == 1?"checked=\"checked\"":"" %>  
-	 <%=(action.equals("show"))?"onclick=\"f_checkBox(this.checked,'is_can_delete')\"":"" %>> </td>
-	 <td colspan="2">
-	 
-	 <%
-	 if(action.equals("show") || action.equals("modify")){		 
-	 %> 
-	  <input type = "submit" value = "삭제">
-	 <%	
-	 }else if(action.equals("create")){
-	 %> 
-	  <input type = "submit" value = "수정">
-	 <%		
-	 }
-	 %>
-	
-	 
-	 
-	 </td>
-</tr>
-<tr>
-	<td>제목</td>
-	<td colspan="5"><input type = "text" name = "title" id = "title" value = "<%= title%>" <%=(action.equals("show"))?"readonly=\"readonly\"":"" %> > </td>
-</tr>
-<tr>
-	<td colspan="6">
-	<textarea name = "content" id = "content" cols=65 rows=10 <%=(action.equals("show"))?"readonly=\"readonly\"":"" %>><%=content %></textarea>
-	
-</tr>
-
+<%
+	}
+}
+%>
 </table>
 
+<br>
+<form action="./cmt.commentInfo">
+<input type = "hidden" name = "action" id = "action" value = "SAVEBAORDITEM" >
+<input type = "hidden" name = "auther" id = "auther" value = "<%=auther %>" >
+<input type = "hidden" name = "board_item_num" id = board_item_num value = "<%=item_num %>" >
+<table border="1" cellspacing="0" cellpadding="0" class="list_table" width="500">
+<tr>
+	<td>이름</td>
+	<td colspan="4"><%=userdto.getName() %></td>
+	<td><input type = "submit" value = "저장"></td>
+	</tr>
+	<tr>
+	<td colspan="6">
+	<textarea name = "content" id = "content" cols=65 rows=3></textarea>
+	</td>
+</tr>
+</table>
+</form>
 </body>
 </html>

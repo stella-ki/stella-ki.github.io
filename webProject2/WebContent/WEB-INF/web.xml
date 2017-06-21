@@ -45,4 +45,13 @@
     <servlet-name>boardInfo</servlet-name>
     <url-pattern>*.boardInfo</url-pattern>
   </servlet-mapping>
+  
+     <servlet>
+    <servlet-name>commentInfo</servlet-name>
+    <servlet-class>com.board.CommentServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>commentInfo</servlet-name>
+    <url-pattern>*.commentInfo</url-pattern>
+  </servlet-mapping>
 </web-app>
