@@ -90,6 +90,9 @@ public class BoardItemDAO {
 					+ "from basic_board where item_num = ?";
 			PreparedStatement prestmt = con.prepareStatement(sql);
 		
+			//String sql = "call get_board_list_using_num(?)";
+			//PreparedStatement prestmt = con.prepareStatement(sql);
+			
 			prestmt.setInt(1, item_num);
 			ResultSet rs = prestmt.executeQuery();
 						
@@ -116,10 +119,10 @@ public class BoardItemDAO {
 	}
 	
 	public List<BoardItemDTO> getBoardItemList(){
-		//String result = "";
 		List<BoardItemDTO> boardItemlist = new ArrayList<BoardItemDTO>();
 		try {
-			Connection con = DBConn.getCon();			
+			Connection con = DBConn.getCon();		
+				
 			String sql = "select "
 					+ "item_num, "
 					+ "create_date, "
@@ -131,6 +134,9 @@ public class BoardItemDAO {
 					+ "is_can_delete "
 					+ "from basic_board";
 			PreparedStatement prestmt = con.prepareStatement(sql);
+			
+			/*String sql = "call get_board_list_using_num(?)";
+			PreparedStatement prestmt = con.prepareStatement(sql);*/
 			
 			ResultSet rs = prestmt.executeQuery();
 			
