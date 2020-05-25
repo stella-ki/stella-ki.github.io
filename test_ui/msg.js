@@ -14,16 +14,6 @@ function sendExtMessageCert() {
       });
 }
 
-function addOption(){
-  var objSel = document.getElementById("selbox");
-  for (i=0; i
-    var objOption = document.createElement("option");       
-    objOption.text = valArr[i] + "개";
-    objOption.value = valArr[i];
-   
-    objSel.options.add(objOption);
-  }
-}
 
 function removeOption(){
   var objSel = document.getElementById("selbox");
