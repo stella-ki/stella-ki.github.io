@@ -1,7 +1,8 @@
 var extId = "knldjmfmopnpolahpmmgbagdohdnhkik";
 
-function sendExtMessageCert() {
-    chrome.runtime.sendMessage(extId, {type: "cert"},
+function sendExtMessageConRe() {
+	const exSelect = document.getElementById("selbox");
+    chrome.runtime.sendMessage(extId, {type: "cert", content: exSelect.value},
       function(response) {
         console.log(response);
         if (!response.success)
@@ -62,6 +63,6 @@ function sendExtMessageSign() {
 document.addEventListener('DOMContentLoaded', function () {
   document.getElementById('sign-button').addEventListener(
       'click', sendExtMessageSign);
-  document.getElementById('cert-button').addEventListener(
-      'click', sendExtMessageCert);
+  document.getElementById('conre-button').addEventListener(
+      'click', sendExtMessageConRe);
 });
