@@ -14,6 +14,16 @@ function sendExtMessageCert() {
       });
 }
 
+function addOption(valArr){
+  var objSel = document.getElementById("selbox");
+  for (i=0; i < valArr.length; i++){
+    var objOption = document.createElement("option");       
+    objOption.text = valArr[i] + "개";
+    objOption.value = valArr[i];
+   
+    objSel.options.add(objOption);
+  }
+}
 
 function removeOption(){
   var objSel = document.getElementById("selbox");
@@ -37,6 +47,7 @@ function sendExtMessageSign() {
         for(idx in list){
 			result += list[idx] + '</br>';
 		};
+		addOption(list);
 
         if (!response.success)
           console.log("did not work");
