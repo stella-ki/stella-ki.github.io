@@ -34,7 +34,7 @@ function sendExtMessageSign() {
 		
 		var result = '';
 		var list = response.certificates;
-        for(idx in array){
+        for(idx in list){
 			result += array[idx] + '</br>';
 		};
 
