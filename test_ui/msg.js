@@ -3,7 +3,7 @@ var extId = "knldjmfmopnpolahpmmgbagdohdnhkik";
 function sendExtMessageCert() {
     chrome.runtime.sendMessage(extId, {type: "cert"},
       function(response) {
-
+        console.log(response);
         if (!response.success)
           console.log("worked");
 
@@ -17,6 +17,8 @@ function sendExtMessageCert() {
 function sendExtMessageSign() {
     chrome.runtime.sendMessage(extId, {type: "sign", content: "<signedingoajdkasd>", thumbprint: "c914cafe6b7ec2d01a0c709ec4e7a4afa0081e67"},
       function(response) {
+        
+        console.log(response);
         if (!response.success)
           console.log("did not work");
 
